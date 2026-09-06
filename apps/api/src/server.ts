@@ -20,8 +20,8 @@ app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
 app.use(morgan('dev'));
 
-// Health check endpoint
-app.get('/health', (req, res) => {
+// Health check & root endpoints
+app.get(['/', '/api', '/health'], (req, res) => {
   return sendSuccess(res, 'ParkEase API Service is running smoothly', {
     uptime: process.uptime(),
     timestamp: new Date().toISOString(),
