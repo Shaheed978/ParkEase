@@ -1,0 +1,60 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ParkEase API Documentation",
+    "version": "1.0.0",
+    "description": "Production REST API endpoints for ParkEase Smart Parking Booking Platform"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api",
+      "description": "Local Development Server"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "User Login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login successful" },
+          "401": { "description": "Invalid credentials" }
+        }
+      }
+    },
+    "/parking/search": {
+      "get": {
+        "summary": "Search Nearby Parking Facilities",
+        "parameters": [
+          { "name": "query", "in": "query", "schema": { "type": "string" } },
+          { "name": "radius", "in": "query", "schema": { "type": "number" } },
+          { "name": "vehicleType", "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Parking search results" }
+        }
+      }
+    },
+    "/bookings": {
+      "post": {
+        "summary": "Create Booking & Reserve Slot",
+        "responses": {
+          "201": { "description": "Booking confirmed" }
+        }
+      }
+    }
+  }
+}
